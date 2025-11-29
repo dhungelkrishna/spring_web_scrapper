@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web Scraping Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      .img-preview:hover {
+        transform: scale(1.2);
+        transition: 0.2s;
+      }
+    </style>
+  </head>
+  <body class="text-xl bg-[#f5f7fa] overflow-x-hidden">
+    <nav
+      class="bg-amber-500 w-full text-center font-extrabold text-3xl text-white p-3"
+    >
+      Scrapping Web
+    </nav>
+
+    <div class="flex flex-col w-[40%] items-center m-auto">
+      <label for="url"></label>
+
+      <input
+        id="url"
+        type="text"
+        placeholder="Enter Website Url"
+        class="border rounded mt-10 w-full px-5 py-4"
+      />
+      <button
+        onclick="scrape(event)"
+        class="text-xl font-extrabold border rounded-md border-amber-500 px-5 py-2 mt-5 text-white bg-amber-500 hover:bg-white hover:text-amber-500 cursor-pointer"
+      >
+        Let's See
+      </button>
+    </div>
+    <div class="content-box m-5 px-3 py-2 border shadow-xl rounded-xl">
+      <h4 class="text-center font-bold">Images</h4>
+      <div id="images" class="flex flex-wrap m-2"></div>
+
+      <h4 class="text-center font-bold">Videos</h4>
+      <div id="videos" class="flex flex-wrap m-2"></div>
+
+      <h4 class="text-center font-bold">links</h4>
+      <div id="links" class="m-2"></div>
+    </div>
+
+    <script>
+      const scrape = (e) => {
+        e.preventDefault();
+        let url = document.querySelector("#url").value;
+        console.log(url);
+        fetch(`/api/scrape?url=${encodeURIComponent(url)}`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            document.querySelector("#images").innerHTML = data.images
+              .map(
+                (img) => `
+      <a href="${img}" target="_blank">
+        <img src="${img}" class="rounded shadow m-2 w-32 h-auto hover:scale-125 transition" />
+      </a>
+  `
+              )
+              .join("");
+          });
+
+        fetch(`/api/scrape?url=${encodeURIComponent(url)}`)
+          .then((res) => res.json())
+          .then((data) => {
+            document.querySelector("#videos").innerHTML = data.videos
+              .map(
+                (vid) =>
+                  `<video controls width='200px' class="m-2">
+                    <source src="${vid}" />
+                    </video>`
+              )
+              .join("");
+          });
+
+        fetch(`/api/scrape?url=${encodeURIComponent(url)}`)
+          .then((res) => res.json())
+          .then((data) => {
+            document.querySelector("#links").innerHTML = data.links
+              .map(
+                (link) =>
+                  `<a href="${link}" class="block text-blue-600 underline m-2 text-sm" target='_blank'>${link} </a>`
+              )
+              .join("");
+          });
+      };
+    </script>
+  </body>
+</html>
