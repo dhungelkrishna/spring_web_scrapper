@@ -11,3 +11,12 @@
 we can access the output on localhost:8080 after running the project.
 
 ``` 
+
+## Screenshots
+
+### 🖼️ Screen 1
+![Screen 1](img/screen1.png)
+
+### 🖼️ Screen 2
+![Screen 2](img/screen2.png)
+
