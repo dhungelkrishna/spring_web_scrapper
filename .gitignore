@@ -1,0 +1,47 @@
+# IntelliJ IDEA
+.idea/
+
+# Eclipse project files
+.project
+.classpath
+.settings/
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# VS Code
+.vscode/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Compiled class files
+*.class
+
+# Spring Boot specific
+*.jar
+*.war
+*.ear
+
+# Local environment configurations
+*.properties
+
+# H2 Database
+h2/
+
+# IntelliJ IDEA's project-specific configuration files
+out/
+
+# Java JetBrains project-specific settings
+.idea/
+
+# IDE specific files
+*.iml
